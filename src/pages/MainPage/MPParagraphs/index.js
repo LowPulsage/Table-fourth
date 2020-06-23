@@ -1,6 +1,7 @@
 /*eslint-disable*/
 import { setFragmentForSearching, setAllNodeRuler } from 'modules/session/session-actions'
 import { useSelector, useDispatch } from 'react-redux'
+import { Skeleton } from 'antd'
 import React, { useState, useEffect } from 'react'
 import formatDoc from './formatDoc'
 import './index.styl'
@@ -42,6 +43,7 @@ const nameFunc = (propValue, name) => {
 }
 
 const MPParagraphs = () => {
+  const [loading, setLoading] = useState(true)
   const selectedWordFileName = useSelector(state => state.source.selectedWordFileName)
   const selectedExcelFileName = useSelector(state => state.source.selectedExcelFileName)
   const fragmentForSearching = useSelector(state => state.source.fragmentForSearching)
@@ -51,6 +53,7 @@ const MPParagraphs = () => {
   const dipatch = useDispatch()
 
   useEffect(() => {
+    setLoading(true);
     if (selectedWordFileName && type) {
       // todo: recheck place. Maybe move some logic to actions?
       const documentOne = require(`modules/session/${type}-docs/${selectedWordFileName}.js`)
@@ -132,6 +135,7 @@ const MPParagraphs = () => {
                 })
               }
             }
+            setLoading(false);
             dipatch(setAllNodeRuler(newTest1))
             // move redux
             // newTest1
@@ -179,12 +183,16 @@ const MPParagraphs = () => {
     }
   }
   return (
-    <div
+    <div>
+      {loading && <Skeleton />}
+      <div
       dangerouslySetInnerHTML={htmlObj}
       className='Paragraphs-root'
       onClick={selectFragment}
-    />
+      />
+    </div>
   )
+
 }
 
 export default MPParagraphs
