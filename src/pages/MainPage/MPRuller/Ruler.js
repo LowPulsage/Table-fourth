@@ -18,7 +18,6 @@ const Ruler = () => {
   useEffect(() => {
     let initialPos = ''
   }, ['e.target.classList[2]'])
-  debugger
   return (
     <div className='Ruler-root' style={{ position: 'relative' }} onClick={handleClickOnSeperator}>
       {nodes && nodes.map(i => (

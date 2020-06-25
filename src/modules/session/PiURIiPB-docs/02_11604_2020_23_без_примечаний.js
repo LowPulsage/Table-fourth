@@ -50,6 +50,11 @@ font-size: 12pt;
 so-language: hi-IN
 }
 
+li {
+	list-style-type: disc; 
+	display: flex;
+}
+
 P.ctl {
 font-size: 12pt;
 so-language: hi-IN
@@ -141,7 +146,7 @@ font-weight: normal
 }
 
 H4 {
-margin-left: -0.75in;
+margin-left: 0;
 margin-top: 0in;
 margin-bottom: 0in;
 direction: ltr;
@@ -311,7 +316,7 @@ NAME="_Toc20689737"></A><A NAME="_Toc16267016"></A>
 Признать утратившими силу:</FONT>
 </FONT>
 </P>
-<OL START=17>
+<UL>
 <LI>
 <P ALIGN=JUSTIFY STYLE="margin-bottom: 0.17in; line-height: 0.22in; widows: 2; orphans: 2">
 <FONT FACE="Calibri, serif">
@@ -1068,7 +1073,7 @@ NAME="_Toc20689737"></A><A NAME="_Toc16267016"></A>
 № 53254).</FONT>
 </FONT>
 </P>
-</OL>
+</UL>
 <P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0.17in; line-height: 0.22in; widows: 2; orphans: 2">
 <BR><BR>
 </P>
@@ -2277,7 +2282,7 @@ NAME="_Toc33620626"></A>
 <P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0.17in; line-height: 0.22in; widows: 2; orphans: 2">
 <BR><BR>
 </P>
-<H3 CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0.17in; line-height: 0.22in"><A NAME="_Toc33620630"></A>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0.17in; line-height: 0.22in"><A NAME="_Toc33620630"></A>
 <FONT COLOR="#00000a">
 <FONT FACE="Calibri, serif">
 <FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US">IX</SPAN></FONT>
@@ -2292,7 +2297,7 @@ NAME="_Toc33620626"></A>
 очаге.</FONT>
 </FONT>
 </FONT>
-</H3>
+</P>
 <P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0.17in; line-height: 0.22in; widows: 2; orphans: 2">
 <BR><BR>
 </P>

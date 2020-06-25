@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import React, { useState, useEffect } from 'react'
 import formatDoc from './formatDoc'
 import './index.styl'
+import { Skeleton } from 'antd'
 
 const nameFunc = (propValue, name) => {
   if (!propValue) return 'red'
@@ -50,12 +51,14 @@ const MPParagraphs = () => {
   const [htmlObj, setHtml] = useState({ __html: '' })
   const dipatch = useDispatch()
 
+
   useEffect(() => {
     if (selectedWordFileName && type) {
       // todo: recheck place. Maybe move some logic to actions?
       const documentOne = require(`modules/session/${type}-docs/${selectedWordFileName}.js`)
       const { formatted, ids, countObj } = formatDoc(documentOne?.default, selectedWordFileName, allDocsFragments)
       let selectedColor = '#bbb'
+
       setHtml({ __html: formatted })
       setTimeout(() => {
         ids.forEach(i => {
@@ -133,29 +136,6 @@ const MPParagraphs = () => {
               }
             }
             dipatch(setAllNodeRuler(newTest1))
-            // move redux
-            // newTest1
-            // return
-            // const newTest1 = allNode.map(item => {
-            //   // seperator.classList.add('seperator')
-            //   const obj = {
-            //     id: item.id
-            //   }
-            //   if (item.currentColor) {
-            //     return {
-            //       ...obj,
-            //       color: item.currentColor
-            //       // anchor: 'href', window.location.pathname + "?word=" + selectedWordFileName + "&excel=" + selectedExcelFileName + "#" + item.id
-            //     }
-            //     seperator.setAttribute('href', window.location.pathname + "?word=" + selectedWordFileName + "&excel=" + selectedExcelFileName + "#" + item.id)
-            //     seperator.classList.add(item.currentColor)
-            //   } else {
-            //     return { ...obj, color: 'greyColor' }
-            //     seperator.classList.add('greyColor')
-            //   }
-            //   rootRuller.appendChild(seperator)
-            // })
-            // dispatch(setAllNodesRuler(newTest1))
           }
         }
       }, 0)
@@ -178,13 +158,16 @@ const MPParagraphs = () => {
       if (node) node.classList.add('active-fragment')
     }
   }
-  return (
-    <div
-      dangerouslySetInnerHTML={htmlObj}
-      className='Paragraphs-root'
-      onClick={selectFragment}
-    />
-  )
+
+  return <>
+    {!htmlObj.__html ? <Skeleton /> :
+      <div
+        dangerouslySetInnerHTML={htmlObj}
+        className='Paragraphs-root'
+        onClick={selectFragment}
+      />
+    }
+  </>
 }
 
 export default MPParagraphs
