@@ -58,6 +58,7 @@ const MPParagraphs = () => {
       // todo: recheck place. Maybe move some logic to actions?
       const documentOne = require(`modules/session/${type}-docs/${selectedWordFileName}.js`)
       const { formatted, ids, countObj } = formatDoc(documentOne?.default, selectedWordFileName, allDocsFragments)
+      console.log('countObj', countObj);
       let selectedColor = '#bbb'
       setHtml({ __html: formatted })
       setTimeout(() => {
@@ -72,7 +73,7 @@ const MPParagraphs = () => {
               Минимум: Number(item['Минимум'].replace('%', ''))
             }
             ))
-            filterArr = filterArr.reduce((prev, current) => {
+            filterArr = filterArr.splice(0, 4000).reduce((prev, current) => {
               return ({
                 Жаккар: prev['Жаккар'] > current['Жаккар'] ? prev['Жаккар'] : current['Жаккар'],
                 Косинус: prev['Косинус'] > current['Косинус'] ? prev['Косинус'] : current['Косинус'],
@@ -92,11 +93,24 @@ const MPParagraphs = () => {
           }
           const name = i.replace(/ /g, '_')
           const node = document.querySelector(`span[name='${name}']`)
+
+          console.log('i', countObj[i]);
+  //        console.log('\n\n\n',node )
           if (node) {
             const parent = node.closest('.western')
             if (parent) {
+
+
               let child = document.createElement('div')
-              child.textContent = `${countObj[i]}`
+              if(countObj[i].length > 1) {
+                countObj[i] = i;
+                child.textContent = countObj[i]
+              }
+              console.log('countObj[i].length', countObj[i]);
+              console.log('countObj[0].', countObj[0]);
+              console.log('countObj[1].', countObj[1]);
+              child.textContent = countObj[i]
+              // console.log('child.textContent', child.textContent);
               parent.classList.add('new-green')
               // class below should include next styles
               parent.classList.add('counter') // display: flex; flex-direction: row; position: relative; 

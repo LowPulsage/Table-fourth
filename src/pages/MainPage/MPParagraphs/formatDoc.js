@@ -1,5 +1,8 @@
 /* eslint-disable */
 export default (docHtml, docName, allDocsFragments) => {
+  console.log('docHtml', docHtml);
+  console.log('docName', docName);
+  console.log('allDocsFragments', allDocsFragments);
   let formatted = docHtml.replace(/(?:\r\n|\r|\n)/g, ' ').replace(/\s\s+/g, ' ')
   formatted = formatted.replace(/ALIGN=JUSTIFY/g, 'class=western')
   const ids = []
@@ -26,6 +29,6 @@ export default (docHtml, docName, allDocsFragments) => {
     const frCutted = fr['Фрагмент 1'].slice(0, frToCut) // "Настоящий Порядок разработан в соответствии с подп"
     wrapElement(frCutted)
   })
-
+  console.log('countObj', countObj);
   return { formatted, countObj, ids }
 }

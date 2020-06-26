@@ -12,7 +12,6 @@ import Ruler from './MPRuller/Ruler'
 const MainPage = () => {
   const selectedExcelName = useSelector(state => state.source.selectedExcelFileName)
   const selectedWordName = useSelector(state => state.source.selectedWordFileName)
-  const [changeInUrl, setChangeInUrl] = useState(false)
   const type = useSelector(state => state.source.type)
   const dispatch = useDispatch()
   const params = useParams()
@@ -29,7 +28,6 @@ const MainPage = () => {
     }
   }, [])
   const changeDocument = () => {
-    setChangeInUrl(true)
   }
   return (
     <div className='MainPage-root'>
@@ -37,7 +35,10 @@ const MainPage = () => {
         <Breadcrumb>
           <Breadcrumb.Item><Link to='/'><HomeOutlined /></Link></Breadcrumb.Item>
           <Breadcrumb.Item><Link to={`/${params.type}`}>Исходные положения</Link></Breadcrumb.Item>
-          <Breadcrumb.Item>{selectedWordName}</Breadcrumb.Item>
+          <Breadcrumb.Item>{
+            selectedWordName
+          }
+          </Breadcrumb.Item>
           <Breadcrumb.Item>{selectedExcelName}</Breadcrumb.Item>
           <a
             href={

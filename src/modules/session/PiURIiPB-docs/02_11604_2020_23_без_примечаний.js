@@ -141,7 +141,7 @@ font-weight: normal
 }
 
 H4 {
-margin-left: -0.75in;
+margin-left: 0 !important;
 margin-top: 0in;
 margin-bottom: 0in;
 direction: ltr;
