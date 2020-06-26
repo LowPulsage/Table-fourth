@@ -95,20 +95,18 @@ const MPParagraphs = () => {
           const node = document.querySelector(`span[name='${name}']`)
 
           console.log('i', countObj[i]);
-  //        console.log('\n\n\n',node )
+          //        console.log('\n\n\n',node )
           if (node) {
             const parent = node.closest('.western')
             if (parent) {
 
 
               let child = document.createElement('div')
-              if(countObj[i].length > 1) {
+              if (countObj[i].length > 1) {
                 countObj[i] = i;
                 child.textContent = countObj[i]
               }
               console.log('countObj[i].length', countObj[i]);
-              console.log('countObj[0].', countObj[0]);
-              console.log('countObj[1].', countObj[1]);
               child.textContent = countObj[i]
               // console.log('child.textContent', child.textContent);
               parent.classList.add('new-green')
@@ -151,29 +149,6 @@ const MPParagraphs = () => {
             }
             setLoading(false);
             dipatch(setAllNodeRuler(newTest1))
-            // move redux
-            // newTest1
-            // return
-            // const newTest1 = allNode.map(item => {
-            //   // seperator.classList.add('seperator')
-            //   const obj = {
-            //     id: item.id
-            //   }
-            //   if (item.currentColor) {
-            //     return {
-            //       ...obj,
-            //       color: item.currentColor
-            //       // anchor: 'href', window.location.pathname + "?word=" + selectedWordFileName + "&excel=" + selectedExcelFileName + "#" + item.id
-            //     }
-            //     seperator.setAttribute('href', window.location.pathname + "?word=" + selectedWordFileName + "&excel=" + selectedExcelFileName + "#" + item.id)
-            //     seperator.classList.add(item.currentColor)
-            //   } else {
-            //     return { ...obj, color: 'greyColor' }
-            //     seperator.classList.add('greyColor')
-            //   }
-            //   rootRuller.appendChild(seperator)
-            // })
-            // dispatch(setAllNodesRuler(newTest1))
           }
         }
       }, 0)
@@ -198,12 +173,12 @@ const MPParagraphs = () => {
   }
   return (
     <div>
-      {loading && <Skeleton />}
-      <div
-      dangerouslySetInnerHTML={htmlObj}
-      className='Paragraphs-root'
-      onClick={selectFragment}
-      />
+      {!htmlObj.__html ? <Skeleton /> :
+        <div
+          dangerouslySetInnerHTML={htmlObj}
+          className='Paragraphs-root'
+          onClick={selectFragment}
+        />}
     </div>
   )
 

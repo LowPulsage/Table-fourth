@@ -25,8 +25,8 @@ export default (docHtml, docName, allDocsFragments) => {
   const fragments = allDocsFragments[docName] || []
 
   fragments.forEach(fr => {
-    const frToCut = 63
-    const frCutted = fr['Фрагмент 1'].slice(0, frToCut) // "Настоящий Порядок разработан в соответствии с подп"
+    const frToCut = 67
+    const frCutted = fr['Фрагмент 1'].substring(0) // "Настоящий Порядок разработан в соответствии с подп"
     wrapElement(frCutted)
   })
   console.log('countObj', countObj);
