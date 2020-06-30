@@ -58,7 +58,6 @@ const MPParagraphs = () => {
       // todo: recheck place. Maybe move some logic to actions?
       const documentOne = require(`modules/session/${type}-docs/${selectedWordFileName}.js`)
       const { formatted, ids, countObj } = formatDoc(documentOne?.default, selectedWordFileName, allDocsFragments)
-      console.log('countObj', countObj);
       let selectedColor = '#bbb'
       setHtml({ __html: formatted })
       setTimeout(() => {
@@ -94,19 +93,19 @@ const MPParagraphs = () => {
           const name = i.replace(/ /g, '_')
           const node = document.querySelector(`span[name='${name}']`)
 
-          console.log('i', countObj[i]);
-          //        console.log('\n\n\n',node )
+          // console.log('iiiiii', countObj[i]);
+
           if (node) {
             const parent = node.closest('.western')
             if (parent) {
-
 
               let child = document.createElement('div')
               if (countObj[i].length > 1) {
                 countObj[i] = i;
                 child.textContent = countObj[i]
+
               }
-              console.log('countObj[i].length', countObj[i]);
+
               child.textContent = countObj[i]
               // console.log('child.textContent', child.textContent);
               parent.classList.add('new-green')
@@ -131,7 +130,7 @@ const MPParagraphs = () => {
             const newTest1 = []
             for (let i = 0, l = allNode.length; i < l; i++) {
               const item = allNode[i]
-              if (i % 5 === 1 || item.currentColor) {
+              if (i % 2 === 1 || item.currentColor) {
                 const newAnchor = 'anchorid=' + i
                 if (!item.id) {
                   const anchorNode = document.createElement('a')
@@ -171,9 +170,10 @@ const MPParagraphs = () => {
       if (node) node.classList.add('active-fragment')
     }
   }
+
   return (
     <div>
-      {!htmlObj.__html ? <Skeleton /> :
+      {!htmlObj.__html ? <Skeleton active /> :
         <div
           dangerouslySetInnerHTML={htmlObj}
           className='Paragraphs-root'
