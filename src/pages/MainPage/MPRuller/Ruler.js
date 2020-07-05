@@ -9,7 +9,6 @@ const Ruler = () => {
   const [selectedSeperator, setSelectedSeperator] = useState()
 
   const handleClickOnSeperator = (e) => {
-    console.log(e.target, 'sdadasdasdasd')
     if (e.target.classList[2]) {
       setSelectedSeperator(e.target.classList[2])
     }

@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import { setFragmentForSearching, setAllNodeRuler } from 'modules/session/session-actions'
+import { setFragmentForSearching, setFragmentForSearchingList, setAllNodeRuler } from 'modules/session/session-actions'
 import { useSelector, useDispatch } from 'react-redux'
 import { Skeleton } from 'antd'
 import React, { useState, useEffect } from 'react'
@@ -93,31 +93,33 @@ const MPParagraphs = () => {
           const name = i.replace(/ /g, '_')
           const node = document.querySelector(`span[name='${name}']`)
 
-          // console.log('iiiiii', countObj[i]);
-
           if (node) {
             const parent = node.closest('.western')
             if (parent) {
-
-              let child = document.createElement('div')
               if (countObj[i].length > 1) {
                 countObj[i] = i;
+              }
+              if (parent.classList.contains('counter')) {
+                parent.children[1].textContent = Number(parent.children[1].innerHTML) + Number(countObj[i])
+              } else {
+                let child = document.createElement('div')
+                if (countObj[i].length > 1) {
+                  countObj[i] = i;
+                }
                 child.textContent = countObj[i]
-
+                // console.log('child.textContent', child.textContent);
+                parent.classList.add('new-green')
+                // class below should include next styles
+                parent.classList.add('counter') // display: flex; flex-direction: row; position: relative; 
+                child.style.cssText = 'color: darkgray; margin-left: 15px; position: absolute; right: -25px; top: calc(50% - 15px)'
+                // add dynamic class name for color
+                parent.currentColor = selectedColor
+                parent.classList.add(selectedColor)
+                // parent.style.cssText = `border-color: ${selectedColor}`
+                parent.id = name
+                parent.appendChild(child)
               }
 
-              child.textContent = countObj[i]
-              // console.log('child.textContent', child.textContent);
-              parent.classList.add('new-green')
-              // class below should include next styles
-              parent.classList.add('counter') // display: flex; flex-direction: row; position: relative; 
-              child.style.cssText = 'color: darkgray; margin-left: 15px; position: absolute; right: -25px; top: calc(50% - 15px)'
-              // add dynamic class name for color
-              parent.currentColor = selectedColor
-              parent.classList.add(selectedColor)
-              // parent.style.cssText = `border-color: ${selectedColor}`
-              parent.id = name
-              parent.appendChild(child)
             }
           }
         })
@@ -157,6 +159,15 @@ const MPParagraphs = () => {
   const selectFragment = e => {
     const parentNode = e.target.closest('p[id]') || {}
     const newId = parentNode.id
+    const chidrenList = parentNode.children?.[0].children?.[0]?.children
+    const fragmentForSearchingList = []
+    if (chidrenList) {
+      for (const currentNode of chidrenList) {
+        fragmentForSearchingList.push(currentNode.innerText.replace(/_/g, ' '))
+      }
+    }
+
+    dipatch(setFragmentForSearchingList(fragmentForSearchingList))
     if (newId) {
       dipatch(setFragmentForSearching(newId))
 

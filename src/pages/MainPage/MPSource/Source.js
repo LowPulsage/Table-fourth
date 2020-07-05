@@ -7,6 +7,7 @@ import './index.styl'
 const Source = () => {
   const selectedWordFileName = useSelector(state => state.source.selectedWordFileName)
   const fragmentForSearching = useSelector(state => state.source.fragmentForSearching)
+  const fragmentForSearchingList = useSelector(state => state.source.fragmentForSearchingList)
   const allDocsFragments = useSelector(state => state.source.allDocsFragments)
   const [arr, setArr] = useState([])
   const [percents, setPercents] = useState([])
@@ -14,7 +15,7 @@ const Source = () => {
   useEffect(() => {
     if (fragmentForSearching) {
       const tempArr = allDocsFragments[selectedWordFileName] || []
-      const filterArr = tempArr.filter(i => i['Фрагмент 1'].includes(fragmentForSearching)) // исходные положения 
+      const filterArr = tempArr.filter(i => fragmentForSearchingList.includes(i['Фрагмент 1'])) // исходные положения 
       setArr(filterArr)
       setPercents(tempArr.map(p => p))
     }
@@ -55,6 +56,7 @@ const Source = () => {
         break;
     }
   }
+
 
   return (
     <div className='Source-root'>

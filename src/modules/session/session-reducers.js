@@ -4,7 +4,8 @@ import {
   SET_SELECTED_WORD,
   SELECT_FOLDER,
   SET_IS_CLICK,
-  SET_ALL_NODE_RULER
+  SET_ALL_NODE_RULER,
+  SET_IS_CLICK_LIST
 } from 'modules/session/session-constants'
 
 export const sessionInitialState = {
@@ -14,7 +15,8 @@ export const sessionInitialState = {
   excelFileNames: [],
   docxFileNames: [],
   type: '',
-  allNodesRuler: []
+  allNodesRuler: [],
+  fragmentForSearchingList: []
 }
 
 export const sessionReducer = (state = sessionInitialState, action) => {
@@ -50,6 +52,12 @@ export const sessionReducer = (state = sessionInitialState, action) => {
       return {
         ...state,
         fragmentForSearching: action.payload.replace(/_/g, ' '),
+      }
+    }
+    case SET_IS_CLICK_LIST: {
+      return {
+        ...state,
+        fragmentForSearchingList: action.payload
       }
     }
     default:
